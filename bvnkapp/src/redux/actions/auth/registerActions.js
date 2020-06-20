@@ -1,9 +1,9 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
-import { history } from "../../history";
+import { history } from "../../../history";
 
-import { config } from "../../authService/firebase/firebaseConfig";
+import { config } from "../../../authService/firebase/firebaseConfig";
 
 if (!firebase.apps.length) {
   firebase.initializeApp(config);

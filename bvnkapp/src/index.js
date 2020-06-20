@@ -1,13 +1,22 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
 import "./index.scss";
 import App from "./App";
+import { Provider } from "react-redux";
+import { store } from "./redux/storeConfig/store";
 import * as serviceWorker from "./serviceWorker";
 
+const LazyApp = lazy(() => import("./App"));
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    {/* create a fallback */}
+    <Suspense>
+      <React.StrictMode>
+        <LazyApp />
+      </React.StrictMode>
+    </Suspense>
+  </Provider>,
   document.getElementById("root")
 );
 
