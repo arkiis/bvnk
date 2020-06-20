@@ -1,7 +1,9 @@
 import React from "react";
+import { Router } from "react-router-dom";
+import "react-perfect-scrollbar/dist/css/styles.css";
 
-function App() {
-  return <h1>hiii</h1>;
-}
+const App = (props) => {
+  return <Router />;
+};
 
 export default App;
