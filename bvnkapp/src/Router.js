@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { Router, Switch, Route } from "react-router-dom";
 import { history } from "./history";
+import Loader from "react-loader-spinner";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { ContextLayout } from "./utils/context/Layout";
@@ -23,7 +24,17 @@ const RouteConfig = ({ component: Component, fullLayout, ...rest }) => (
             return (
               //permission added
               <LayoutTag {...props}>
-                <Suspense fallback={"loading"}>
+                <Suspense
+                  fallback={
+                    <Loader
+                      type="Puff"
+                      color="#00BFFF"
+                      height={100}
+                      width={100}
+                      timeout={3000} //3 secs
+                    />
+                  }
+                >
                   <Component {...props} />
                 </Suspense>
               </LayoutTag>
