@@ -38,3 +38,10 @@ export const loginWithGoogle = () => {
       });
   };
 };
+
+export const logoutWithFirebase = (user) => {
+  return (dispatch) => {
+    dispatch({ type: "LOGOUT_WITH_FIREBASE", payload: {} });
+    history.push("/pages/login");
+  };
+};

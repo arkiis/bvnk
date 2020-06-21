@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import themeConfig from "../../configs/themeConfig";
-
+import FullLayout from "../../layouts/FullpageLayout";
+import PropTypes from "prop-types";
 const layouts = {
-  vertical: VerticalLayout,
   full: FullLayout,
-  horizontal: HorizontalLayout,
 };
 
 const ContextLayout = React.createContext();
@@ -18,11 +17,12 @@ const Layout = ({ children }) => {
   });
 
   let { width, activeLayout, lastLayout, direction } = layout;
-  const updateWidth = () => {
-    setLayout({ ...layout, width: window.innerWidth });
-  };
 
-  const handleWindowRezise = () => {
+  const updateWidth = useCallback(() => {
+    setLayout({ ...layout, width: window.innerWidth });
+  }, [layout]);
+
+  const handleWindowRezise = useCallback(() => {
     updateWidth();
     if (activeLayout === "horizontal" && width <= 1199) {
       setLayout({
@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
         lastLayout: "vertical",
       });
     }
-  };
+  }, [activeLayout, lastLayout, updateWidth, width]);
 
   useEffect(() => {
     if (window !== "undefined") {
@@ -69,7 +69,7 @@ const Layout = ({ children }) => {
         state: layout,
         fullLayout: layouts["full"],
         verticalLayout: layouts["vertical"],
-        HorizontalLayout: layouts["horizontal"],
+        horizontalLayout: layouts["horizontal"],
         switchLayout: (layouts) => {
           setLayout({
             ...layout,
@@ -81,6 +81,9 @@ const Layout = ({ children }) => {
       {children}
     </ContextLayout.Provider>
   );
+};
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export { Layout, ContextLayout };

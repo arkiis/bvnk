@@ -7,6 +7,9 @@ export const login = (state = { userRole: "admin" }, action) => {
     case "LOGIN_WITH_GOOGLE": {
       return { ...state, values: action.payload };
     }
+    case "LOGOUT_WITH_FIREBASE": {
+      return { ...state, values: action.payload };
+    }
     default: {
       return state;
     }
